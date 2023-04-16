@@ -25,7 +25,7 @@ module "vpc" {
   }
 }
 
-resource "aws_instance" "jdm-bastion-host" { // OS = Ubuntu
+resource "aws_instance" "jdm_bastion_host" { // OS = Ubuntu
   ami                         = lookup(var.amis, var.region)
   instance_type               = "t2.medium"
   key_name                    = "jr-dev-mm"
@@ -38,7 +38,7 @@ resource "aws_instance" "jdm-bastion-host" { // OS = Ubuntu
   }
 }
 
-resource "aws_instance" "Kube-control" { // OS = Amazon OS
+resource "aws_instance" "Kube_control" { // OS = Amazon OS
   ami                         = lookup(var.amis, var.region)
   instance_type               = "t2.medium"
   key_name                    = "jr-dev-mm"
@@ -51,7 +51,7 @@ resource "aws_instance" "Kube-control" { // OS = Amazon OS
   }
 }
 
-resource "aws_instance" "Kube-worker" { // OS = Amazon OS
+resource "aws_instance" "Kube_worker" { // OS = Amazon OS
   ami                         = lookup(var.amis, var.region)
   instance_type               = "t2.medium"
   key_name                    = "jr-dev-mm"
