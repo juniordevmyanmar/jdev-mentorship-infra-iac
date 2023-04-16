@@ -1,12 +1,17 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
-  name = var.VPC_NAME
-  cidr = var.VPC_CIDR
+  name = var.vpc-name
+  cidr = var.vpc-cidr
 
-  azs             = [var.ZONE1, var.ZONE2, var.ZONE3]
-  private_subnets = [var.PRIV_SUB1_CIDR, var.PRIV_SUB2_CIDR]
-  public_subnets  = [var.PUB_SUB_CIDR]
+  azs = [var.zone-a, var.zone-b, var.zone-c]
+
+  public_subnets = [var.public-subnet-1, var.public-subnet-2, var.public-subnet-3]
+
+  private_subnets = [
+    var.private-subnet-1, var.private-subnet-2, var.private-subnet-3,
+    var.rds-private-subnet-1, var.rds-private-subnet-2, var.rds-private-subnet-3
+  ]
 
   enable_dns_hostnames = true
   enable_dns_support   = true
@@ -20,16 +25,41 @@ module "vpc" {
   }
 }
 
-resource "aws_instance" "jdm-bastion-host" { // OS = Amazon OS
-  ami                         = "ami-0bf97847fcd5c9f57"
+resource "aws_instance" "jdm_bastion_host" { // OS = Ubuntu
+  ami                         = lookup(var.amis, var.region)
   instance_type               = "t2.medium"
   key_name                    = "jr-dev-mm"
   associate_public_ip_address = true
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.jdm-public-sg.id]
-  user_data                   = file("web.sh")
 
   tags = {
-    Name = "jdm-bastion-host"
+    Name = "${var.project}-bastion-host"
+  }
+}
+
+resource "aws_instance" "Kube_control" { // OS = Amazon OS
+  ami                         = lookup(var.amis, var.region)
+  instance_type               = "t2.medium"
+  key_name                    = "jr-dev-mm"
+  associate_public_ip_address = true
+  subnet_id                   = module.vpc.private_subnets[0]
+  vpc_security_group_ids      = [aws_security_group.jdm-private-sg.id]
+
+  tags = {
+    Name = "${var.project}-Kube-control"
+  }
+}
+
+resource "aws_instance" "Kube_worker" { // OS = Amazon OS
+  ami                         = lookup(var.amis, var.region)
+  instance_type               = "t2.medium"
+  key_name                    = "jr-dev-mm"
+  associate_public_ip_address = true
+  subnet_id                   = module.vpc.private_subnets[1]
+  vpc_security_group_ids      = [aws_security_group.jdm-private-sg.id]
+
+  tags = {
+    Name = "${var.project}-Kube-Worker"
   }
 }
