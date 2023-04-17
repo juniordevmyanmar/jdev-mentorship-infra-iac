@@ -1,3 +1,4 @@
+
 variable "region" {
   default = "ap-southeast-1"
 }
@@ -19,6 +20,11 @@ variable "private-key" {
 
 variable "public-key" {
   default = "jr-dev-mm.pub"
+}
+
+variable "project" {
+  default = "jr-dev-mm"
+
 }
 
 variable "ec2-user" {
@@ -81,6 +87,6 @@ variable "zone-c" {
   default = "ap-southeast-1c"
 }
 
-variable "project" {
+variable "env" {
   default = "jr-dev-mm"
 }

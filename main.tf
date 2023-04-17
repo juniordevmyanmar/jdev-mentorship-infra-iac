@@ -1,5 +1,6 @@
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
+  version = "4.0.1"
 
   name = var.vpc-name
   cidr = var.vpc-cidr
@@ -25,23 +26,23 @@ module "vpc" {
   }
 }
 
-resource "aws_instance" "jdm_bastion_host" { // OS = Ubuntu
+resource "aws_instance" "jdm-bastion-host" { // OS = Ubuntu
   ami                         = lookup(var.amis, var.region)
-  instance_type               = "t2.medium"
-  key_name                    = "jr-dev-mm"
+  instance_type               = "t2.micro"
+  key_name                    = var.env
   associate_public_ip_address = true
   subnet_id                   = module.vpc.public_subnets[0]
   vpc_security_group_ids      = [aws_security_group.jdm-public-sg.id]
 
   tags = {
-    Name = "${var.project}-bastion-host"
+    Name = "${var.project}-jdmm-bastion-host"
   }
 }
 
-resource "aws_instance" "Kube_control" { // OS = Amazon OS
+resource "aws_instance" "Kube-control" { // OS = Amazon OS
   ami                         = lookup(var.amis, var.region)
   instance_type               = "t2.medium"
-  key_name                    = "jr-dev-mm"
+  key_name                    = var.env
   associate_public_ip_address = true
   subnet_id                   = module.vpc.private_subnets[0]
   vpc_security_group_ids      = [aws_security_group.jdm-private-sg.id]
@@ -51,10 +52,10 @@ resource "aws_instance" "Kube_control" { // OS = Amazon OS
   }
 }
 
-resource "aws_instance" "Kube_worker" { // OS = Amazon OS
+resource "aws_instance" "Kube-worker" { // OS = Amazon OS
   ami                         = lookup(var.amis, var.region)
   instance_type               = "t2.medium"
-  key_name                    = "jr-dev-mm"
+  key_name                    = var.env
   associate_public_ip_address = true
   subnet_id                   = module.vpc.private_subnets[1]
   vpc_security_group_ids      = [aws_security_group.jdm-private-sg.id]

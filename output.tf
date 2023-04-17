@@ -34,6 +34,7 @@ output "rds-private-subnets-2" {
   value = module.vpc.private_subnets[4]
 }
 
+
 output "rds-private-subnets-3" {
   value = module.vpc.private_subnets[5]
 }
