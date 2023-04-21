@@ -1,6 +1,10 @@
+
 variable "region" {
   default = "ap-southeast-1"
 }
+
+variable "aws_access_key" {}
+variable "aws_secret_key" {}
 
 variable "amis" {
   type = map(any)
@@ -19,6 +23,11 @@ variable "private-key" {
 
 variable "public-key" {
   default = "jr-dev-mm.pub"
+}
+
+variable "project" {
+  default = "jr-dev-mm"
+
 }
 
 variable "ec2-user" {
@@ -81,6 +90,6 @@ variable "zone-c" {
   default = "ap-southeast-1c"
 }
 
-variable "project" {
+variable "env" {
   default = "jr-dev-mm"
 }
