@@ -1,9 +1,59 @@
+### AWS ###
 variable "region" {
-  default = "ap-southeast-1"
+  description = "AWS Region to use for the resources"
+  type        = string
+  default     = "ap-southeast-1"
 }
 
-variable aws_access_key {}
-variable aws_secret_key {}
+variable "aws_access_key" {
+  description = "AWS Access Key"
+  type        = string
+}
+
+variable "aws_secret_key" {
+  description = "AWS Secret Key"
+  type        = string
+}
+
+### AWS ###
+
+### VPC ###
+
+variable "cidr" {
+  type        = string
+  description = "Base CIDR Block for VPC"
+  default     = "10.0.0.0/16"
+}
+
+variable "nat_subnets" {
+  type        = list(string)
+  description = "A list of public subnets inside the VPC"
+  default     = ["10.0.0.0/24"]
+}
+
+variable "kubernetes_subnets" {
+  type        = list(string)
+  description = "A list of kubernetes subnets inside the VPC"
+  default     = ["10.0.1.0/24", "10.0.2.0/24"]
+}
+
+### VPC ###
+
+### EC2 ###
+
+variable "azs" {
+  type        = list(string)
+  description = "A list of availability zones names"
+  default = [
+    "ap-southeast-1a", "ap-southeast-1b", "ap-southeast-1c"
+  ]
+}
+
+variable "instance_type" {
+  description = "Type for EC2 Instance"
+  type        = string
+  default     = "t2.medium"
+}
 
 variable "amis" {
   type = map(any)
@@ -12,78 +62,36 @@ variable "amis" {
   }
 }
 
-variable "instance-count" {
-  default = 3
+variable "instance_count" {
+  description = "Number of Instances to create in VPC"
+  type        = number
+  default     = 2
 }
 
-variable "private-key" {
-  default = "jr-dev-mm"
-}
+### Resource Tagging ###
 
-variable "public-key" {
-  default = "jr-dev-mm.pub"
-}
-
-variable "ec2-user" {
-  default = "ec2-user"
-}
-
-variable "vpc-name" {
-  default = "JrDevMM"
-}
-
-variable "vpc-cidr" {
-  default = "10.0.0.0/16"
-}
-
-variable "public-subnet-1" {
-  default = "10.0.1.0/24"
-}
-
-variable "public-subnet-2" {
-  default = "10.0.2.0/24"
-}
-
-variable "public-subnet-3" {
-  default = "10.0.3.0/24"
-}
-
-variable "private-subnet-1" {
-  default = "10.0.4.0/24"
-}
-
-variable "private-subnet-2" {
-  default = "10.0.5.0/24"
-}
-
-variable "private-subnet-3" {
-  default = "10.0.6.0/24"
-}
-
-variable "rds-private-subnet-1" {
-  default = "10.0.7.0/24"
-}
-
-variable "rds-private-subnet-2" {
-  default = "10.0.8.0/24"
-}
-
-variable "rds-private-subnet-3" {
-  default = "10.0.9.0/24"
-}
-
-variable "zone-a" {
-  default = "ap-southeast-1a"
-}
-
-variable "zone-b" {
-  default = "ap-southeast-1b"
-}
-
-variable "zone-c" {
-  default = "ap-southeast-1c"
+variable "company" {
+  type        = string
+  description = "Company name for resource tagging"
+  default     = "Junior-Dev-Myanmar"
 }
 
 variable "project" {
-  default = "jr-dev-mm"
+  description = "Project name for resource tagging"
+  type        = string
+  default     = "Junior Dev Myanmar Batch-1"
+}
+
+variable "billing_code" {
+  description = "Billing code for resource tagging"
+  type        = string
+  default     = "ACCT2023"
+}
+
+### Resource Tagging ###
+
+variable "Name" {
+  description = "Naming prefix for resources"
+  type        = string
+  default     = "junior-dev-mm"
 }

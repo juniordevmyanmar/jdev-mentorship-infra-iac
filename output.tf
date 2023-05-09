@@ -1,48 +1,24 @@
-output "vpc-id" {
+/*output "vpc-id" {
   value = module.vpc.vpc_id
 }
 
-output "public-subnets-1" {
-  value = module.vpc.public_subnets[0]
+output "nat-subnets" {
+  value = module.vpc.public_subnets[*]
 }
 
-output "public-subnets-2" {
-  value = module.vpc.public_subnets[1]
+output "kubernetes-subnets" {
+  value = module.vpc.private_subnets[*]
 }
 
-output "public-subnets-3" {
-  value = module.vpc.public_subnets[2]
+output "nat-public" {
+  value = aws_instance.nat.public_ip
 }
 
-output "private-subnets-1" {
-  value = module.vpc.private_subnets[0]
+output "nat-private" {
+  value = aws_instance.nat.private_ip
 }
 
-output "private-subnets-2" {
-  value = module.vpc.private_subnets[1]
+output "controlplane" {
+  value = aws_instance.controlplane.private_ip
 }
-
-output "private-subnets-3" {
-  value = module.vpc.private_subnets[2]
-}
-
-output "rds-private-subnets-1" {
-  value = module.vpc.private_subnets[3]
-}
-
-output "rds-private-subnets-2" {
-  value = module.vpc.private_subnets[4]
-}
-
-output "rds-private-subnets-3" {
-  value = module.vpc.private_subnets[5]
-}
-
-output "jdm-bastion-host-public-ip" {
-  value = aws_instance.jdm-bastion-host.public_ip
-}
-
-
-output "jdm-bastion-host-private-ip" {
-  value = aws_instance.jdm-bastion-host.private_ip
-}
+*/
