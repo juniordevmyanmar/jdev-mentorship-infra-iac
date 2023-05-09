@@ -1,3 +1,4 @@
+/*
 module "vpc" {
   source = "terraform-aws-modules/vpc/aws"
 
@@ -63,3 +64,4 @@ resource "aws_instance" "Kube_worker" { // OS = Amazon OS
     Name = "${var.project}-Kube-Worker"
   }
 }
+*/
