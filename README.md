@@ -43,8 +43,8 @@
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
 | <a name="input_amis"></a> [amis](#input\_amis) | n/a | `map(any)` | <pre>{<br>  "ap-southeast-1": "ami-0a72af05d27b49ccb"<br>}</pre> | no |
-| <a name="input_aws_access_key"></a> [aws\_access\_key](#input\_aws\_access\_key) | AWS Access Key | `string` | `"AKIA4RYHWKHB3IWD2XDL"` | no |
-| <a name="input_aws_secret_key"></a> [aws\_secret\_key](#input\_aws\_secret\_key) | AWS Secret Key | `string` | `"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"` | no |
+| <a name="input_aws_access_key"></a> [aws\_access\_key](#input\_aws\_access\_key) | AWS Access Key | `string` | `"-"` | no |
+| <a name="input_aws_secret_key"></a> [aws\_secret\_key](#input\_aws\_secret\_key) | AWS Secret Key | `string` | `"-"` | no |
 | <a name="input_billing_code"></a> [billing\_code](#input\_billing\_code) | Billing code for resource tagging | `string` | `"ACCT2023"` | no |
 | <a name="input_cidr"></a> [cidr](#input\_cidr) | Base CIDR Block for VPC | `string` | `"10.0.0.0/16"` | no |
 | <a name="input_company"></a> [company](#input\_company) | Company name for resource tagging | `string` | `"Junior-Dev-MM"` | no |
